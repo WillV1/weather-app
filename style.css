@@ -1,14 +1,19 @@
 .input-group {
     margin: 10px;
     display: flex;
-    bottom: 37em;
+    bottom: 30em;
 }
 
 .list-group {
     position: relative;
-    bottom: 35em;
+    bottom: 30em;
 }
 
 .forecast {
     margin: 5px;
+}
+
+.five {
+    display: flex;
+    flex-direction: row;
 }

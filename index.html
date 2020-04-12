@@ -26,17 +26,15 @@
                 <div class="col-4"><h5>Search for a City:</h5></div>
                 <div class="col-8">
                     <div class="card w-100">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                          <a href="#" class="btn btn-primary">Button</a>
+                        <div class="card-body city-name">
+                          <p class="card-text"></p>
                         </div>
                     </div>
                     <div class="row forecast">
                         <div class="col-7"><h5>5-Day Forecast:</h5></div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2">
+                        <div class="col-sm-2 five">
                           <div class="card">
                             <div class="card-body">
                               <h5 class="card-title">Special title treatment</h5>
@@ -45,7 +43,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-2 five">
                           <div class="card">
                             <div class="card-body">
                               <h5 class="card-title">Special title treatment</h5>
@@ -54,7 +52,33 @@
                             </div>
                           </div>
                         </div>
-                      </div>
+                        <div class="col-sm-2 five">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Special title treatment</h5>
+                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                              <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-2 five">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Special title treatment</h5>
+                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                              <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-2 five">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                <p class="card-text"></p>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -62,7 +86,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="">
                         <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
+                        <button data-city class="btn btn-primary button" type="button">
                             <i class="fa fa-search"></i>
                         </button>
                         </div>
@@ -72,17 +96,18 @@
             <div class="row">
                 <div class="col-4">
                     <ul class="list-group">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Morbi leo risus</li>
-                        <li class="list-group-item">Porta ac consectetur ac</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
+                        <li class="list-group-item"></li>
+                        <li class="list-group-item"></li>
+                        <li class="list-group-item"></li>
+                        <li class="list-group-item"></li>
+                        <li class="list-group-item"></li>
                       </ul>
                 </div>        
             </div>
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

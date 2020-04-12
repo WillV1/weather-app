@@ -1,12 +1,12 @@
 .input-group {
     margin: 10px;
     display: flex;
-    bottom: 30em;
+
 }
 
 .list-group {
     position: relative;
-    bottom: 30em;
+ 
 }
 
 .forecast {

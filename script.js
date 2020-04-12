@@ -43,26 +43,56 @@ $(document).ready(function () {
 
                         var cityName = $('<h4>');
                         var date = moment().format('l');
-                        var temp = $('<p>');
-                        var fahrenheit = temp * (9/5) - 459.67
+                        var temp = response.main.temp * (9 / 5) - 459.67;
+                        var fahrenheit = $('<p>')
                         var humidity = $('<p>');
-                        var windSpeed = $('<p>');
-                        var imperialWindSpeed = windSpeed * 2.236936
+                        var windSpeed = response.wind.speed * 2.236936;
+                        var imperialWindSpeed = $('<p>');
                         var index = $('<p>')
                         cityName.text(response.name)
-                        farenheit.text(response.main.temp * (9/5) - 459.67)
-                        humidity.text(response.main.humdity + '%')
-                        imperialWindSpeed.text(response.wind.speed * 2.236936 + "MPH")
-                        index.text(responseTwo.value)
+                        fahrenheit.text("Temperature: " + temp.toFixed(1) + "°F")
+                        humidity.text("Humidity: " + response.main.humidity + '%')
+                        imperialWindSpeed.text("Wind Speed: " + windSpeed.toFixed(1) + " MPH")
+                        index.text("UV Index: " + responseTwo.value)
                         $('.city-name').append(cityName).append(date);
                         $('.city-name').append(fahrenheit);
-                        $('.city-name').append(humdity);
+                        $('.city-name').append(humidity);
                         $('.city-name').append(imperialWindSpeed);
                         $('.city-name').append(index)
-                    });
+                    })
+
+                var queryURLThree = 'api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=3fd6fe0ffea0635ce66bad8fbbaab06d'
+                $.ajax({
+                    url: queryURLThree,
+                    method: "GET"
+                })
+                    .then(function (responseThree) {
+                        var dayOne = $('<h5>');
+                        var dayTwo = $('<h5>');
+                        var dayThree = $('<h5>');
+                        var dayFour = $('<h5>');
+                        var dayFive = $('<h5>');
+                        dayOne.text(moment(date).add(1, 'd').format('l'));
+                        dayTwo.text(moment(date).add(2, 'd').format('l'));
+                        dayThree.text(moment(date).add(3, 'd').format('l'));
+                        dayFour.text(moment(date).add(4, 'd').format('l'));
+                        dayFive.text(moment(date).add(5, 'd').format('l'));
+                        $('#one').append(dayOne);
+                        $('#two').append(dayTwo);
+                        $('#three').append(dayThree);
+                        $('#four').append(dayFour);
+                        $('#five').append(dayFive);
+
+                        var forecastTemp = responseThree.main.temp * (9 / 5) - 459.67;
+                        var forecastFahrenheit = $('<p>');
+                        var forecastHumidity = $('<p>');
+                        forecastFahrenheit.text("Temperature: " + forecastTemp.toFixed(1) + "°F")
+                        forecastHumidity.text("Humidity: " + responseThree.main.humidity + '%')
+                    })
             })
     })
 })
+
 
 
 //Set up array for previously visited cities

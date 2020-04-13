@@ -29,15 +29,15 @@ $(document).ready(function () {
             .then(function (response) {
                 var latitude = response.coord.lat;
                 var longititude = response.coord.lon;
-                var queryURLTwo = 'http://api.openweathermap.org/data/2.5/uvi?appid=3fd6fe0ffea0635ce66bad8fbbaab06d&lat=' + latitude + '&lon=' + longititude;
-                console.log(response)
+                var queryURLTwo = 'https://api.openweathermap.org/data/2.5/uvi?appid=3fd6fe0ffea0635ce66bad8fbbaab06d&lat=' + latitude + '&lon=' + longititude;
+                //console.log(response)
                 // Generate separate API call for UV index after inital API call to first obtain latitude and longitude from city weather data
                 $.ajax({
                     url: queryURLTwo,
                     method: "GET"
                 })
                     .then(function (responseTwo) {
-                        console.log(responseTwo);
+                        //console.log(responseTwo);
 
 
                         //Generate code for storage of current information in information card; 5 day forecast information; on different urls
@@ -67,7 +67,7 @@ $(document).ready(function () {
                         $('.previous-cities').append(newCity);
                     })
 
-                var queryURLThree = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=3fd6fe0ffea0635ce66bad8fbbaab06d'
+                var queryURLThree = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=3fd6fe0ffea0635ce66bad8fbbaab06d'
                 $.ajax({
                     url: queryURLThree,
                     method: "GET"
@@ -90,20 +90,41 @@ $(document).ready(function () {
                         $('#four').append(dayFour);
                         $('#five').append(dayFive);
 
-                        var forecastTemp = responseThree.main.temp * (9 / 5) - 459.67;
-                        var forecastFahrenheit = $('<p>');
-                        var forecastHumidity = $('<p>');
-                        forecastFahrenheit.text("Temperature: " + forecastTemp.toFixed(1) + "°F")
-                        forecastHumidity.text("Humidity: " + responseThree.main.humidity + '%')
+
+                        var forecastTempOne = responseThree.list[8].main.temp_max * (9 / 5) - 459.67;
+                        var forecastTempTwo = responseThree.list[16].main.temp_max * (9 / 5) - 459.67;
+                        var forecastTempThree = responseThree.list[24].main.temp_max * (9 / 5) - 459.67;
+                        var forecastTempFour = responseThree.list[32].main.temp_max * (9 / 5) - 459.67;
+                        var forecastTempFive = responseThree.list[39].main.temp_max * (9 / 5) - 459.67;
+                        var forecastFahrenheitOne = $('<p>');
+                        var forecastFahrenheitTwo = $('<p>');
+                        var forecastFahrenheitThree = $('<p>');
+                        var forecastFahrenheitFour = $('<p>');
+                        var forecastFahrenheitFive = $('<p>');
+                        var forecastHumidityOne = $('<p>');
+                        var forecastHumidityTwo = $('<p>');
+                        var forecastHumidityThree = $('<p>');
+                        var forecastHumidityFour = $('<p>');
+                        var forecastHumidityFive = $('<p>');
+                        forecastFahrenheitOne.text("Temp: " + temp.toFixed(1) + "°F")
+
+                            
+                            console.log(forecastTemp);
+                            //var forecastFahrenheit = $('<p>');
+                            //var forecastHumidity = $('<p>');
+                            //forecastFahrenheit.text("Temperature: " + forecastTemp.toFixed(1) + "°F")
+                            //forecastHumidity.text("Humidity: " + responseThree.main.humidity + '%')
+                        
+
                     })
             })
-   
 
 
 
-//Set up array for previously visited cities
 
-})
+        //Set up array for previously visited cities
+
+    })
 })
 //Set up click event for when user clicks on previous cities to pull up forecast
 

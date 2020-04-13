@@ -13,10 +13,24 @@
 $(document).ready(function () {
 
     var date = moment().format('l');
-
     $(".button").on("click", function () {
-        $('.card-body').html(' ');
         var city = $('.form-control').val()
+        var cityList = [];
+        newCity = $('<li>')
+        newCity.addClass("list-group-item");
+        newCity.text(city)
+        cityList.push(newCity);
+        $('.previous-cities').append(newCity);
+        search(city);
+    })
+
+    $('.previous-cities').on('click', "li", function () {
+        var city = $(this).text()
+        search(city);
+    })
+    function search(city) {
+        $('.card-body').html(' ');
+
         var queryURLOne = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=3fd6fe0ffea0635ce66bad8fbbaab06d'
 
 
@@ -43,7 +57,7 @@ $(document).ready(function () {
                         //Generate code for storage of current information in information card; 5 day forecast information; on different urls
 
                         //console.log(response.name)
-                        var cityList = [];
+                       
                         var cityName = $('<h4>');
                         var temp = response.main.temp * (9 / 5) - 459.67;
                         var fahrenheit = $('<p>')
@@ -61,11 +75,10 @@ $(document).ready(function () {
                         $('.city-name').append(humidity);
                         $('.city-name').append(imperialWindSpeed);
                         $('.city-name').append(index)
-                        newCity = $('<p>')
-                        newCity.text(city)
-                        cityList.push(newCity);
-                        $('.previous-cities').append(newCity);
+                        
                     })
+
+
 
                 var queryURLThree = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=3fd6fe0ffea0635ce66bad8fbbaab06d'
                 $.ajax({
@@ -118,18 +131,18 @@ $(document).ready(function () {
                         forecastHumidityFive.text("Humidity: " + responseThree.list[39].main.humidity + '%');
                         $('#one').append(forecastFahrenheitOne);
                         $('#one').append(forecastHumidityOne);
-                        
+
 
                     })
             })
 
 
+    }
+
+    //Set up array for previously visited cities
 
 
-        //Set up array for previously visited cities
-
-    })
-})
+});
 //Set up click event for when user clicks on previous cities to pull up forecast
 
 

@@ -1,14 +1,12 @@
 
 .list-group {
-    clear: left;
+    margin: 10px;
 }
 
 .forecast {
     margin: 5px;
 }
 
-p {
+li {
     text-transform: capitalize;
 }
-
-

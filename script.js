@@ -16,9 +16,7 @@ $(document).ready(function () {
 
     $(".button").on("click", function () {
         $('.card-body').html(' ');
-        var cityList = [];
-        var city = $('.form-control').val() && $('<li>')
-        cityList.push(city);
+        var city = $('.form-control').val()
         var queryURLOne = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=3fd6fe0ffea0635ce66bad8fbbaab06d'
 
 
@@ -45,6 +43,7 @@ $(document).ready(function () {
                         //Generate code for storage of current information in information card; 5 day forecast information; on different urls
 
                         //console.log(response.name)
+                        var cityList = [];
                         var cityName = $('<h4>');
                         var temp = response.main.temp * (9 / 5) - 459.67;
                         var fahrenheit = $('<p>')
@@ -62,6 +61,10 @@ $(document).ready(function () {
                         $('.city-name').append(humidity);
                         $('.city-name').append(imperialWindSpeed);
                         $('.city-name').append(index)
+                        newCity = $('<p>')
+                        newCity.text(city)
+                        cityList.push(newCity);
+                        $('.previous-cities').append(newCity);
                     })
 
                 var queryURLThree = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=3fd6fe0ffea0635ce66bad8fbbaab06d'

@@ -23,7 +23,19 @@
                 <div class=col-sm-12>
                     <div class="p-3 mb-2 text-white bg-dark text-center"><h1>Weather Dashboard</h1></div>
                 </div>
+              </div>
                 <div class="col-4"><h5>Search for a City:</h5></div>
+                <div class="row">
+                  <div class="col-3">
+                      <div class="input-group">
+                          <input type="text" class="form-control" placeholder="">
+                          <div class="input-group-append">
+                          <button data-city class="btn btn-primary button" type="button">
+                              <i class="fa fa-search"></i>
+                          </button>
+                          </div>
+                      </div> 
+                  </div> 
                 <div class="col-8">
                     <div class="card w-100">
                         <div id="new-city" class="card-body city-name">
@@ -32,57 +44,10 @@
                     <div class="row forecast">
                         <div class="col-7"><h5>5-Day Forecast:</h5></div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-2 five">
-                          <div class="card">
-                            <div id="one" class="card-body">
-                              <p class="card-text"></p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-2 five">
-                          <div class="card">
-                            <div id="two" class="card-body">
-                              <p class="card-text"></p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-2 five">
-                          <div class="card">
-                            <div id="three" class="card-body">
-                              <p class="card-text"></p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-2 five">
-                          <div class="card">
-                            <div id="four" class="card-body">
-                              <p class="card-text"></p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-2 five">
-                            <div class="card">
-                              <div id="five" class="card-body">
-                                <p class="card-text"></p>
-                              </div>
-                            </div>
-                          </div>
-                    </div>
                 </div>
+              
             </div>
-            <div class="row">
-                <div class="col-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
-                        <div class="input-group-append">
-                        <button data-city class="btn btn-primary button" type="button">
-                            <i class="fa fa-search"></i>
-                        </button>
-                        </div>
-                    </div> 
-                </div>
-            </div>
+            
             <div class="row">
                 <div class="col-4">
                     <ul class="list-group">
@@ -92,7 +57,45 @@
                         <li class="list-group-item"></li>
                         <li class="list-group-item"></li>
                       </ul>
-                </div>        
+                </div>
+              </div> 
+                    <div class="row" id="five-day">
+                      <div class="col-sm-2">
+                        <div class="card">
+                          <div id="one" class="card-body">
+                            <p class="card-text"></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="card">
+                          <div id="two" class="card-body">
+                            <p class="card-text"></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="card">
+                          <div id="three" class="card-body">
+                            <p class="card-text"></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="card">
+                          <div id="four" class="card-body">
+                            <p class="card-text"></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                          <div class="card">
+                            <div id="five" class="card-body">
+                              <p class="card-text"></p>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
             </div>
         </div>
     </main>

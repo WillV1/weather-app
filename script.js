@@ -106,14 +106,18 @@ $(document).ready(function () {
                         var forecastHumidityThree = $('<p>');
                         var forecastHumidityFour = $('<p>');
                         var forecastHumidityFive = $('<p>');
-                        forecastFahrenheitOne.text("Temp: " + temp.toFixed(1) + "°F")
-
-                            
-                            console.log(forecastTemp);
-                            //var forecastFahrenheit = $('<p>');
-                            //var forecastHumidity = $('<p>');
-                            //forecastFahrenheit.text("Temperature: " + forecastTemp.toFixed(1) + "°F")
-                            //forecastHumidity.text("Humidity: " + responseThree.main.humidity + '%')
+                        forecastFahrenheitOne.text("Temp: " + forecastTempOne.toFixed(1) + "°F");
+                        forecastFahrenheitTwo.text("Temp: " + forecastTempTwo.toFixed(1) + "°F");
+                        forecastFahrenheitThree.text("Temp: " + forecastTempThree.toFixed(1) + "°F");
+                        forecastFahrenheitFour.text("Temp: " + forecastTempFour.toFixed(1) + "°F");
+                        forecastFahrenheitFive.text("Temp: " + forecastTempFive.toFixed(1) + "°F");
+                        forecastHumidityOne.text("Humidity: " + responseThree.list[8].main.humidity + '%');
+                        forecastHumidityTwo.text("Humidity: " + responseThree.list[16].main.humidity + '%');
+                        forecastHumidityThree.text("Humidity: " + responseThree.list[24].main.humidity + '%');
+                        forecastHumidityFour.text("Humidity: " + responseThree.list[32].main.humidity + '%');
+                        forecastHumidityFive.text("Humidity: " + responseThree.list[39].main.humidity + '%');
+                        $('#one').append(forecastFahrenheitOne);
+                        $('#one').append(forecastHumidityOne);
                         
 
                     })

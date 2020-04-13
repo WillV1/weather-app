@@ -12,8 +12,13 @@
 //Make API call for current weather based on city entered in search box
 $(document).ready(function () {
 
+    var date = moment().format('l');
+
     $(".button").on("click", function () {
-        var city = $('.form-control').val()
+        $('.card-body').html(' ');
+        var cityList = [];
+        var city = $('.form-control').val() && $('<li>')
+        cityList.push(city);
         var queryURLOne = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=3fd6fe0ffea0635ce66bad8fbbaab06d'
 
 
@@ -40,9 +45,7 @@ $(document).ready(function () {
                         //Generate code for storage of current information in information card; 5 day forecast information; on different urls
 
                         //console.log(response.name)
-
                         var cityName = $('<h4>');
-                        var date = moment().format('l');
                         var temp = response.main.temp * (9 / 5) - 459.67;
                         var fahrenheit = $('<p>')
                         var humidity = $('<p>');
@@ -61,12 +64,13 @@ $(document).ready(function () {
                         $('.city-name').append(index)
                     })
 
-                var queryURLThree = 'api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=3fd6fe0ffea0635ce66bad8fbbaab06d'
+                var queryURLThree = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=3fd6fe0ffea0635ce66bad8fbbaab06d'
                 $.ajax({
                     url: queryURLThree,
                     method: "GET"
                 })
                     .then(function (responseThree) {
+                        console.log(responseThree);
                         var dayOne = $('<h5>');
                         var dayTwo = $('<h5>');
                         var dayThree = $('<h5>');
@@ -90,13 +94,14 @@ $(document).ready(function () {
                         forecastHumidity.text("Humidity: " + responseThree.main.humidity + '%')
                     })
             })
-    })
-})
+   
 
 
 
 //Set up array for previously visited cities
 
+})
+})
 //Set up click event for when user clicks on previous cities to pull up forecast
 
 

@@ -13,18 +13,24 @@
 $(document).ready(function () {
 
     var date = moment().format('l');
-    $(".button").on("click", function () {
+    $(".button").on("click", function (event) {
+        event.preventDefault();
         var city = $('.form-control').val()
         var cityList = [];
         newCity = $('<li>')
         newCity.addClass("list-group-item");
         newCity.text(city)
         cityList.push(newCity);
+        localStorage.setItem("city", city)
+        var lastCity = localStorage.getItem("city");
+        lastCity.text = $('li')
         $('.previous-cities').append(newCity);
+
         search(city);
     })
 
-    $('.previous-cities').on('click', "li", function () {
+    $('.previous-cities').on('click', "li", function (event) {
+        event.preventDefault();
         var city = $(this).text()
         search(city);
     })
@@ -57,25 +63,47 @@ $(document).ready(function () {
                         //Generate code for storage of current information in information card; 5 day forecast information; on different urls
 
                         //console.log(response.name)
-                       
+
                         var cityName = $('<h4>');
                         var temp = response.main.temp * (9 / 5) - 459.67;
                         var fahrenheit = $('<p>')
                         var humidity = $('<p>');
                         var windSpeed = response.wind.speed * 2.236936;
                         var imperialWindSpeed = $('<p>');
-                        var index = $('<p>')
+                        var index = $('<p>');
+                        //index.text("UV Index:");
+                        var indexNumber = $('<p>');
+                        indexNumber.text(parseFloat(responseTwo.value));
+                        indexNumber.attr('id', 'index-number');
+                        
+                        if (indexNumber <= 2) {
+                        $('#index-number').attr('class', 'd-inline p-2 bg-success text-white')
+                        
+                          } else if (indexNumber >=3 || indexNumber <=7) {
+                            $('#index-number').attr('class', 'd-inline p-2 bg-warning text-white')
+
+                          } else {
+                            $('#index-number').attr('class', 'd-inline p-2 bg-danger text-white')
+                        
+                          } 
+
+                        var todaysWeather = response.weather[0].icon;
                         cityName.text(response.name)
                         fahrenheit.text("Temperature: " + temp.toFixed(1) + "°F")
                         humidity.text("Humidity: " + response.main.humidity + '%')
                         imperialWindSpeed.text("Wind Speed: " + windSpeed.toFixed(1) + " MPH")
-                        index.text("UV Index: " + responseTwo.value)
+                        
+                        //var uvIndex = (index + indexNumber);
+                        
+                        var weatherIcon = 'https://openweathermap.org/img/wn/' + todaysWeather + ".png";
+                        var iconDisplay = $('<img>')
+                        iconDisplay.attr('src', weatherIcon);
                         $('.city-name').append(cityName).append(date);
+                        $('.city-name').append(iconDisplay);
                         $('.city-name').append(fahrenheit);
                         $('.city-name').append(humidity);
                         $('.city-name').append(imperialWindSpeed);
-                        $('.city-name').append(index)
-                        
+                        $('.city-name').append(indexNumber)
                     })
 
 
@@ -87,11 +115,11 @@ $(document).ready(function () {
                 })
                     .then(function (responseThree) {
                         console.log(responseThree);
-                        var dayOne = $('<h5>');
-                        var dayTwo = $('<h5>');
-                        var dayThree = $('<h5>');
-                        var dayFour = $('<h5>');
-                        var dayFive = $('<h5>');
+                        var dayOne = $('<h6>');
+                        var dayTwo = $('<h6>');
+                        var dayThree = $('<h6>');
+                        var dayFour = $('<h6>');
+                        var dayFive = $('<h6>');
                         dayOne.text(moment(date).add(1, 'd').format('l'));
                         dayTwo.text(moment(date).add(2, 'd').format('l'));
                         dayThree.text(moment(date).add(3, 'd').format('l'));
@@ -114,11 +142,31 @@ $(document).ready(function () {
                         var forecastFahrenheitThree = $('<p>');
                         var forecastFahrenheitFour = $('<p>');
                         var forecastFahrenheitFive = $('<p>');
+                        var forecastWeatherOne = responseThree.list[8].weather[0].icon;
+                        var forecastWeatherTwo = responseThree.list[16].weather[0].icon;
+                        var forecastWeatherThree = responseThree.list[24].weather[0].icon;
+                        var forecastWeatherFour = responseThree.list[32].weather[0].icon;
+                        var forecastWeatherFive = responseThree.list[39].weather[0].icon;
                         var forecastHumidityOne = $('<p>');
                         var forecastHumidityTwo = $('<p>');
                         var forecastHumidityThree = $('<p>');
                         var forecastHumidityFour = $('<p>');
                         var forecastHumidityFive = $('<p>');
+                        var weatherIconOne = 'https://openweathermap.org/img/wn/' + forecastWeatherOne + ".png";
+                        var iconDisplayOne = $('<img>')
+                        iconDisplayOne.attr('src', weatherIconOne);
+                        var weatherIconTwo = 'https://openweathermap.org/img/wn/' + forecastWeatherTwo + ".png";
+                        var iconDisplayTwo = $('<img>')
+                        iconDisplayTwo.attr('src', weatherIconTwo);
+                        var weatherIconThree = 'https://openweathermap.org/img/wn/' + forecastWeatherThree + ".png";
+                        var iconDisplayThree = $('<img>')
+                        iconDisplayThree.attr('src', weatherIconThree);
+                        var weatherIconFour = 'https://openweathermap.org/img/wn/' + forecastWeatherFour + ".png";
+                        var iconDisplayFour = $('<img>')
+                        iconDisplayFour.attr('src', weatherIconFour);
+                        var weatherIconFive = 'https://openweathermap.org/img/wn/' + forecastWeatherFive + ".png";
+                        var iconDisplayFive = $('<img>')
+                        iconDisplayFive.attr('src', weatherIconFive);
                         forecastFahrenheitOne.text("Temp: " + forecastTempOne.toFixed(1) + "°F");
                         forecastFahrenheitTwo.text("Temp: " + forecastTempTwo.toFixed(1) + "°F");
                         forecastFahrenheitThree.text("Temp: " + forecastTempThree.toFixed(1) + "°F");
@@ -129,14 +177,19 @@ $(document).ready(function () {
                         forecastHumidityThree.text("Humidity: " + responseThree.list[24].main.humidity + '%');
                         forecastHumidityFour.text("Humidity: " + responseThree.list[32].main.humidity + '%');
                         forecastHumidityFive.text("Humidity: " + responseThree.list[39].main.humidity + '%');
+                        $('#one').append(iconDisplayOne);
                         $('#one').append(forecastFahrenheitOne);
                         $('#one').append(forecastHumidityOne);
+                        $('#two').append(iconDisplayTwo);
                         $('#two').append(forecastFahrenheitTwo);
                         $('#two').append(forecastHumidityTwo);
+                        $('#three').append(iconDisplayThree);
                         $('#three').append(forecastFahrenheitThree);
                         $('#three').append(forecastHumidityThree);
+                        $('#four').append(iconDisplayFour);
                         $('#four').append(forecastFahrenheitFour);
                         $('#four').append(forecastHumidityFour);
+                        $('#five').append(iconDisplayFive);
                         $('#five').append(forecastFahrenheitFive);
                         $('#five').append(forecastHumidityFive);
 

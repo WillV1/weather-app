@@ -8,4 +8,5 @@
 
 li {
     text-transform: capitalize;
+    cursor: pointer;  
 }

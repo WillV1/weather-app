@@ -131,6 +131,14 @@ $(document).ready(function () {
                         forecastHumidityFive.text("Humidity: " + responseThree.list[39].main.humidity + '%');
                         $('#one').append(forecastFahrenheitOne);
                         $('#one').append(forecastHumidityOne);
+                        $('#two').append(forecastFahrenheitTwo);
+                        $('#two').append(forecastHumidityTwo);
+                        $('#three').append(forecastFahrenheitThree);
+                        $('#three').append(forecastHumidityThree);
+                        $('#four').append(forecastFahrenheitFour);
+                        $('#four').append(forecastHumidityFour);
+                        $('#five').append(forecastFahrenheitFive);
+                        $('#five').append(forecastHumidityFive);
 
 
                     })

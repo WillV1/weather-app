@@ -13,18 +13,30 @@
 $(document).ready(function () {
 
     var date = moment().format('l');
+
     $(".button").on("click", function (event) {
         event.preventDefault();
+
         var city = $('.form-control').val()
         var cityList = [];
         newCity = $('<li>')
         newCity.addClass("list-group-item");
         newCity.text(city)
         cityList.push(newCity);
-        localStorage.setItem("city", city)
-        var lastCity = localStorage.getItem("city");
-        lastCity.text = $('li')
         $('.previous-cities').append(newCity);
+
+        
+        var recentCities = JSON.parse(localStorage.getItem('cities')) || []
+        
+        $('.previous-cities').val(recentCities);
+        
+        var savedCity = {
+        name: city
+            };
+
+        recentCities.push(savedCity);
+
+        localStorage.setItem('cities', JSON.stringify(recentCities));
 
         search(city);
     })
@@ -64,46 +76,48 @@ $(document).ready(function () {
 
                         //console.log(response.name)
 
-                        var cityName = $('<h4>');
+                        var cityName = response.name;
                         var temp = response.main.temp * (9 / 5) - 459.67;
                         var fahrenheit = $('<p>')
                         var humidity = $('<p>');
                         var windSpeed = response.wind.speed * 2.236936;
                         var imperialWindSpeed = $('<p>');
-                        var index = $('<p>');
-                        //index.text("UV Index:");
-                        var indexNumber = $('<p>');
-                        indexNumber.text(parseFloat(responseTwo.value));
-                        indexNumber.attr('id', 'index-number');
+                        var indexEl = $('<span>');
+                        indexEl.text("UV Index: ");
+                        var indexNumber = parseFloat(responseTwo.value)
+                        var indexNumberEl = $('<span>');
+                        indexNumberEl.text(indexNumber);
+                        indexNumberEl.attr('id', 'index-number');
                         
                         if (indexNumber <= 2) {
-                        $('#index-number').attr('class', 'd-inline p-2 bg-success text-white')
-                        
-                          } else if (indexNumber >=3 || indexNumber <=7) {
-                            $('#index-number').attr('class', 'd-inline p-2 bg-warning text-white')
-
+                        indexNumberEl.addClass('d-inline p-2 bg-success text-white')
+                            console.log(indexNumber)
+                          } else if (indexNumber >=3 && indexNumber <=7) {
+                            indexNumberEl.addClass('d-inline p-2 bg-warning text-white')
+                                console.log(indexNumber)
                           } else {
-                            $('#index-number').attr('class', 'd-inline p-2 bg-danger text-white')
-                        
+                            indexNumberEl.addClass('d-inline p-2 bg-danger text-white')
+                            console.log(indexNumber)
                           } 
 
                         var todaysWeather = response.weather[0].icon;
-                        cityName.text(response.name)
+                        //cityName.text(response.name)
                         fahrenheit.text("Temperature: " + temp.toFixed(1) + "°F")
                         humidity.text("Humidity: " + response.main.humidity + '%')
                         imperialWindSpeed.text("Wind Speed: " + windSpeed.toFixed(1) + " MPH")
                         
-                        //var uvIndex = (index + indexNumber);
+                        //var uvIndex = (indexEl + indexNumber);
                         
                         var weatherIcon = 'https://openweathermap.org/img/wn/' + todaysWeather + ".png";
                         var iconDisplay = $('<img>')
                         iconDisplay.attr('src', weatherIcon);
-                        $('.city-name').append(cityName).append(date);
+                        $('.city-name').append(cityName + ":" + date);
                         $('.city-name').append(iconDisplay);
                         $('.city-name').append(fahrenheit);
                         $('.city-name').append(humidity);
                         $('.city-name').append(imperialWindSpeed);
-                        $('.city-name').append(indexNumber)
+                        $('.city-name').append(indexEl);
+                        $('.city-name').append(indexNumberEl);
                     })
 
 

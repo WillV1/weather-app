@@ -164,8 +164,8 @@ $(document).ready(function () {
                         for (var i = 0; i < responseThree.list.length; i++) {
 
                             if (responseThree.list[i].dt_txt.indexOf("12:00:00") !== -1 &&
-                            responseThree.list[i].dt_txt.indexOf("15:00:00") !== -1 ||
-                            responseThree.list[i].dt_txt.indexOf("18:00:00") !== -1) {
+                                responseThree.list[i].dt_txt.indexOf("15:00:00") !== -1 ||
+                                responseThree.list[i].dt_txt.indexOf("18:00:00") !== -1) {
 
                                 var selector = "#" + j;
                                 var forecastTempOne = (responseThree.list[i].main.temp_max - 273.15) * 9 / 5 + 32

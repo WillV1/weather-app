@@ -14,30 +14,35 @@ $(document).ready(function () {
 
     var date = moment().format('l');
 
+    function storeCities () {
+        $('.previous-cities').empty()
+        var recentCities = JSON.parse(localStorage.getItem('cities')) || []
+        //console.log(recentCities);
+        for (var i=0; i < recentCities.length; i++){
+            var newCity = $('<li>')
+            newCity.addClass("list-group-item");
+            newCity.text(recentCities[i].name)
+            $('.previous-cities').append(newCity);
+        }
+    }
+        storeCities()
+
     $(".button").on("click", function (event) {
         event.preventDefault();
 
         var city = $('.form-control').val()
         var cityList = [];
-        newCity = $('<li>')
-        newCity.addClass("list-group-item");
-        newCity.text(city)
-        cityList.push(newCity);
-        $('.previous-cities').append(newCity);
+        
 
         
         var recentCities = JSON.parse(localStorage.getItem('cities')) || []
-        
         $('.previous-cities').val(recentCities);
-        
         var savedCity = {
         name: city
             };
-
         recentCities.push(savedCity);
-
         localStorage.setItem('cities', JSON.stringify(recentCities));
-
+        storeCities()
         search(city);
     })
 
@@ -91,13 +96,13 @@ $(document).ready(function () {
                         
                         if (indexNumber <= 2) {
                         indexNumberEl.addClass('d-inline p-2 bg-success text-white')
-                            console.log(indexNumber)
+                            
                           } else if (indexNumber >=3 && indexNumber <=7) {
                             indexNumberEl.addClass('d-inline p-2 bg-warning text-white')
-                                console.log(indexNumber)
+                                
                           } else {
                             indexNumberEl.addClass('d-inline p-2 bg-danger text-white')
-                            console.log(indexNumber)
+                         
                           } 
 
                         var todaysWeather = response.weather[0].icon;
@@ -111,7 +116,7 @@ $(document).ready(function () {
                         var weatherIcon = 'https://openweathermap.org/img/wn/' + todaysWeather + ".png";
                         var iconDisplay = $('<img>')
                         iconDisplay.attr('src', weatherIcon);
-                        $('.city-name').append(cityName + ":" + date);
+                        $('.city-name').append(cityName + ": " + date);
                         $('.city-name').append(iconDisplay);
                         $('.city-name').append(fahrenheit);
                         $('.city-name').append(humidity);
@@ -139,74 +144,34 @@ $(document).ready(function () {
                         dayThree.text(moment(date).add(3, 'd').format('l'));
                         dayFour.text(moment(date).add(4, 'd').format('l'));
                         dayFive.text(moment(date).add(5, 'd').format('l'));
-                        $('#one').append(dayOne);
-                        $('#two').append(dayTwo);
-                        $('#three').append(dayThree);
-                        $('#four').append(dayFour);
-                        $('#five').append(dayFive);
+                        $('#1').append(dayOne);
+                        $('#2').append(dayTwo);
+                        $('#3').append(dayThree);
+                        $('#4').append(dayFour);
+                        $('#5').append(dayFive);
 
+                        var j = 1
+                        for (var i = 0; i < responseThree.list.length; i++){
 
-                        var forecastTempOne = responseThree.list[8].main.temp_max * (9 / 5) - 459.67;
-                        var forecastTempTwo = responseThree.list[16].main.temp_max * (9 / 5) - 459.67;
-                        var forecastTempThree = responseThree.list[24].main.temp_max * (9 / 5) - 459.67;
-                        var forecastTempFour = responseThree.list[32].main.temp_max * (9 / 5) - 459.67;
-                        var forecastTempFive = responseThree.list[39].main.temp_max * (9 / 5) - 459.67;
-                        var forecastFahrenheitOne = $('<p>');
-                        var forecastFahrenheitTwo = $('<p>');
-                        var forecastFahrenheitThree = $('<p>');
-                        var forecastFahrenheitFour = $('<p>');
-                        var forecastFahrenheitFive = $('<p>');
-                        var forecastWeatherOne = responseThree.list[8].weather[0].icon;
-                        var forecastWeatherTwo = responseThree.list[16].weather[0].icon;
-                        var forecastWeatherThree = responseThree.list[24].weather[0].icon;
-                        var forecastWeatherFour = responseThree.list[32].weather[0].icon;
-                        var forecastWeatherFive = responseThree.list[39].weather[0].icon;
-                        var forecastHumidityOne = $('<p>');
-                        var forecastHumidityTwo = $('<p>');
-                        var forecastHumidityThree = $('<p>');
-                        var forecastHumidityFour = $('<p>');
-                        var forecastHumidityFive = $('<p>');
-                        var weatherIconOne = 'https://openweathermap.org/img/wn/' + forecastWeatherOne + ".png";
-                        var iconDisplayOne = $('<img>')
-                        iconDisplayOne.attr('src', weatherIconOne);
-                        var weatherIconTwo = 'https://openweathermap.org/img/wn/' + forecastWeatherTwo + ".png";
-                        var iconDisplayTwo = $('<img>')
-                        iconDisplayTwo.attr('src', weatherIconTwo);
-                        var weatherIconThree = 'https://openweathermap.org/img/wn/' + forecastWeatherThree + ".png";
-                        var iconDisplayThree = $('<img>')
-                        iconDisplayThree.attr('src', weatherIconThree);
-                        var weatherIconFour = 'https://openweathermap.org/img/wn/' + forecastWeatherFour + ".png";
-                        var iconDisplayFour = $('<img>')
-                        iconDisplayFour.attr('src', weatherIconFour);
-                        var weatherIconFive = 'https://openweathermap.org/img/wn/' + forecastWeatherFive + ".png";
-                        var iconDisplayFive = $('<img>')
-                        iconDisplayFive.attr('src', weatherIconFive);
-                        forecastFahrenheitOne.text("Temp: " + forecastTempOne.toFixed(1) + "°F");
-                        forecastFahrenheitTwo.text("Temp: " + forecastTempTwo.toFixed(1) + "°F");
-                        forecastFahrenheitThree.text("Temp: " + forecastTempThree.toFixed(1) + "°F");
-                        forecastFahrenheitFour.text("Temp: " + forecastTempFour.toFixed(1) + "°F");
-                        forecastFahrenheitFive.text("Temp: " + forecastTempFive.toFixed(1) + "°F");
-                        forecastHumidityOne.text("Humidity: " + responseThree.list[8].main.humidity + '%');
-                        forecastHumidityTwo.text("Humidity: " + responseThree.list[16].main.humidity + '%');
-                        forecastHumidityThree.text("Humidity: " + responseThree.list[24].main.humidity + '%');
-                        forecastHumidityFour.text("Humidity: " + responseThree.list[32].main.humidity + '%');
-                        forecastHumidityFive.text("Humidity: " + responseThree.list[39].main.humidity + '%');
-                        $('#one').append(iconDisplayOne);
-                        $('#one').append(forecastFahrenheitOne);
-                        $('#one').append(forecastHumidityOne);
-                        $('#two').append(iconDisplayTwo);
-                        $('#two').append(forecastFahrenheitTwo);
-                        $('#two').append(forecastHumidityTwo);
-                        $('#three').append(iconDisplayThree);
-                        $('#three').append(forecastFahrenheitThree);
-                        $('#three').append(forecastHumidityThree);
-                        $('#four').append(iconDisplayFour);
-                        $('#four').append(forecastFahrenheitFour);
-                        $('#four').append(forecastHumidityFour);
-                        $('#five').append(iconDisplayFive);
-                        $('#five').append(forecastFahrenheitFive);
-                        $('#five').append(forecastHumidityFive);
-
+                            if (responseThree.list[i].dt_txt.indexOf("12:00:00")!==-1){
+                                 
+                                var selector = "#" + j;
+                                var forecastTempOne = responseThree.list[i].main.temp_max * (9 / 5) - 459.67;
+                                var forecastFahrenheitOne = $('<p>');
+                                var forecastHumidityOne = $('<p>');
+                                var forecastWeatherOne = responseThree.list[i].weather[0].icon;
+                                var weatherIconOne = 'https://openweathermap.org/img/wn/' + forecastWeatherOne + ".png";
+                                var iconDisplayOne = $('<img>')
+                                iconDisplayOne.attr('src', weatherIconOne);
+                                forecastFahrenheitOne.text("Temp: " + forecastTempOne.toFixed(1) + "°F");
+                                forecastHumidityOne.text("Humidity: " + responseThree.list[i].main.humidity + '%');
+                                $(selector).append(forecastFahrenheitOne);
+                                $(selector).append(forecastHumidityOne);
+                                $(selector).append(iconDisplayOne);
+                                //console.log(forecastWeatherOne);
+                                j++;
+                            }
+                        }
 
                     })
             })

@@ -10,3 +10,7 @@ li {
     text-transform: capitalize;
     cursor: pointer;  
 }
+
+h6 {
+    float: left;
+}

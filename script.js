@@ -23,6 +23,13 @@ $(document).ready(function () {
             newCity.addClass("list-group-item");
             newCity.text(recentCities[i].name)
             $('.previous-cities').append(newCity);
+
+            function limitArray() {
+                if (recentCities.length > 5) {
+                    recentCities.shift();
+                }
+            }
+            limitArray()
         }
     }
     storeCities()
@@ -41,17 +48,18 @@ $(document).ready(function () {
         recentCities.push(savedCity);
         localStorage.setItem('cities', JSON.stringify(recentCities));
 
-        cityList.slice(0, 5);
-
         storeCities()
         search(city);
     })
+
 
 
     $('.previous-cities').on('click', "li", function (event) {
         event.preventDefault();
         var city = $(this).text()
         search(city);
+
+
     })
     function search(city) {
         $('.card-body').html(' ');
@@ -84,7 +92,7 @@ $(document).ready(function () {
                         //console.log(response.name)
 
                         var cityName = response.name;
-                        var temp = response.main.temp * (9 / 5) - 459.67;
+                        var temp = (response.main.temp - 273.15) * 9 / 5 + 32
                         var fahrenheit = $('<p>')
                         var humidity = $('<p>');
                         var windSpeed = response.wind.speed * 2.236936;
@@ -155,10 +163,12 @@ $(document).ready(function () {
                         var j = 1
                         for (var i = 0; i < responseThree.list.length; i++) {
 
-                            if (responseThree.list[i].dt_txt.indexOf("12:00:00") !== -1) {
+                            if (responseThree.list[i].dt_txt.indexOf("12:00:00") !== -1 &&
+                            responseThree.list[i].dt_txt.indexOf("15:00:00") !== -1 ||
+                            responseThree.list[i].dt_txt.indexOf("18:00:00") !== -1) {
 
                                 var selector = "#" + j;
-                                var forecastTempOne = responseThree.list[i].main.temp_max * (9 / 5) - 459.67;
+                                var forecastTempOne = (responseThree.list[i].main.temp_max - 273.15) * 9 / 5 + 32
                                 var forecastFahrenheitOne = $('<p>');
                                 var forecastHumidityOne = $('<p>');
                                 var forecastWeatherOne = responseThree.list[i].weather[0].icon;

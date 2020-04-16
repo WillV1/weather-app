@@ -14,37 +14,39 @@ $(document).ready(function () {
 
     var date = moment().format('l');
 
-    function storeCities () {
+    function storeCities() {
         $('.previous-cities').empty()
         var recentCities = JSON.parse(localStorage.getItem('cities')) || []
         //console.log(recentCities);
-        for (var i=0; i < recentCities.length; i++){
+        for (var i = 0; i < recentCities.length; i++) {
             var newCity = $('<li>')
             newCity.addClass("list-group-item");
             newCity.text(recentCities[i].name)
             $('.previous-cities').append(newCity);
         }
     }
-        storeCities()
+    storeCities()
 
     $(".button").on("click", function (event) {
         event.preventDefault();
 
         var city = $('.form-control').val()
         var cityList = [];
-        
 
-        
         var recentCities = JSON.parse(localStorage.getItem('cities')) || []
         $('.previous-cities').val(recentCities);
         var savedCity = {
-        name: city
-            };
+            name: city
+        };
         recentCities.push(savedCity);
         localStorage.setItem('cities', JSON.stringify(recentCities));
+
+        cityList.slice(0, 5);
+
         storeCities()
         search(city);
     })
+
 
     $('.previous-cities').on('click', "li", function (event) {
         event.preventDefault();
@@ -93,26 +95,26 @@ $(document).ready(function () {
                         var indexNumberEl = $('<span>');
                         indexNumberEl.text(indexNumber);
                         indexNumberEl.attr('id', 'index-number');
-                        
+
                         if (indexNumber <= 2) {
-                        indexNumberEl.addClass('d-inline p-2 bg-success text-white')
-                            
-                          } else if (indexNumber >=3 && indexNumber <=7) {
+                            indexNumberEl.addClass('d-inline p-2 bg-success text-white')
+
+                        } else if (indexNumber >= 3 && indexNumber <= 7) {
                             indexNumberEl.addClass('d-inline p-2 bg-warning text-white')
-                                
-                          } else {
+
+                        } else {
                             indexNumberEl.addClass('d-inline p-2 bg-danger text-white')
-                         
-                          } 
+
+                        }
 
                         var todaysWeather = response.weather[0].icon;
                         //cityName.text(response.name)
                         fahrenheit.text("Temperature: " + temp.toFixed(1) + "°F")
                         humidity.text("Humidity: " + response.main.humidity + '%')
                         imperialWindSpeed.text("Wind Speed: " + windSpeed.toFixed(1) + " MPH")
-                        
+
                         //var uvIndex = (indexEl + indexNumber);
-                        
+
                         var weatherIcon = 'https://openweathermap.org/img/wn/' + todaysWeather + ".png";
                         var iconDisplay = $('<img>')
                         iconDisplay.attr('src', weatherIcon);
@@ -151,10 +153,10 @@ $(document).ready(function () {
                         $('#5').append(dayFive);
 
                         var j = 1
-                        for (var i = 0; i < responseThree.list.length; i++){
+                        for (var i = 0; i < responseThree.list.length; i++) {
 
-                            if (responseThree.list[i].dt_txt.indexOf("12:00:00")!==-1){
-                                 
+                            if (responseThree.list[i].dt_txt.indexOf("12:00:00") !== -1) {
+
                                 var selector = "#" + j;
                                 var forecastTempOne = responseThree.list[i].main.temp_max * (9 / 5) - 459.67;
                                 var forecastFahrenheitOne = $('<p>');

@@ -12,7 +12,7 @@
 //Make API call for current weather based on city entered in search box
 $(document).ready(function () {
 
-    var date = moment().format('M DD YYYY');
+    var date = moment().format("MM-DD-YYYY")
 
     function storeCities() {
         $('.previous-cities').empty()

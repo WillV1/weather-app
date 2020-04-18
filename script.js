@@ -151,11 +151,11 @@ $(document).ready(function () {
                         var dayThree = $('<h6>');
                         var dayFour = $('<h6>');
                         var dayFive = $('<h6>');
-                        dayOne.text(moment(date).add(1, 'd').format('l'));
-                        dayTwo.text(moment(date).add(2, 'd').format('l'));
-                        dayThree.text(moment(date).add(3, 'd').format('l'));
-                        dayFour.text(moment(date).add(4, 'd').format('l'));
-                        dayFive.text(moment(date).add(5, 'd').format('l'));
+                        dayOne.text(moment(date).add(1, 'days').format("MM-DD-YYYY"));
+                        dayTwo.text(moment(date).add(2, 'days').format("MM-DD-YYYY"));
+                        dayThree.text(moment(date).add(3, 'days').format("MM-DD-YYYY"));
+                        dayFour.text(moment(date).add(4, 'days').format("MM-DD-YYYY"));
+                        dayFive.text(moment(date).add(5, 'days').format("MM-DD-YYYY"));
                         $('#1').append(dayOne);
                         $('#2').append(dayTwo);
                         $('#3').append(dayThree);

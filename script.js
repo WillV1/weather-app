@@ -12,25 +12,27 @@
 //Make API call for current weather based on city entered in search box
 $(document).ready(function () {
 
-    var date = moment().format('l');
+    var date = moment().format('M DD YYYY');
 
     function storeCities() {
         $('.previous-cities').empty()
         var recentCities = JSON.parse(localStorage.getItem('cities')) || []
         //console.log(recentCities);
         for (var i = 0; i < recentCities.length; i++) {
+            while (recentCities.length > 5) {
+                var lastFive = recentCities.length - 5;
+                var index = 0;
+                recentCities.splice(index, lastFive);
+                index++
+            }
             var newCity = $('<li>')
             newCity.addClass("list-group-item");
             newCity.text(recentCities[i].name)
             $('.previous-cities').append(newCity);
 
-            function limitArray() {
-                if (recentCities.length > 5) {
-                    recentCities.shift();
-                }
-            }
-            limitArray()
+            
         }
+        console.log(recentCities);
     }
     storeCities()
 
@@ -143,7 +145,7 @@ $(document).ready(function () {
                     method: "GET"
                 })
                     .then(function (responseThree) {
-                        console.log(responseThree);
+                        //console.log(responseThree);
                         var dayOne = $('<h6>');
                         var dayTwo = $('<h6>');
                         var dayThree = $('<h6>');

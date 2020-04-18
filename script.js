@@ -12,7 +12,9 @@
 //Make API call for current weather based on city entered in search box
 $(document).ready(function () {
 
-    var date = moment().format("MM-DD-YYYY")
+    var date = moment().format("YYYY-MM-DD")
+
+    console.log(date);
 
     function storeCities() {
         $('.previous-cities').empty()
@@ -151,11 +153,11 @@ $(document).ready(function () {
                         var dayThree = $('<h6>');
                         var dayFour = $('<h6>');
                         var dayFive = $('<h6>');
-                        dayOne.text(moment(date).add(1, 'days').format("MM-DD-YYYY"));
-                        dayTwo.text(moment(date).add(2, 'days').format("MM-DD-YYYY"));
-                        dayThree.text(moment(date).add(3, 'days').format("MM-DD-YYYY"));
-                        dayFour.text(moment(date).add(4, 'days').format("MM-DD-YYYY"));
-                        dayFive.text(moment(date).add(5, 'days').format("MM-DD-YYYY"));
+                        dayOne.text(moment(date).add(1, 'days').format("MMM Do YY"));
+                        dayTwo.text(moment(date).add(2, 'days').format("MMM Do YY"));
+                        dayThree.text(moment(date).add(3, 'days').format("MMM Do YY"));
+                        dayFour.text(moment(date).add(4, 'days').format("MMM Do YY"));
+                        dayFive.text(moment(date).add(5, 'days').format("MMM Do YY"));
                         $('#1').append(dayOne);
                         $('#2').append(dayTwo);
                         $('#3').append(dayThree);

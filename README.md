@@ -16,4 +16,4 @@ Forecasted weather icon
 
 I then created an array that allowed the user to enter multiple cities to track the conditions in multiple locations and stores the cities selected to local storage, so the cities selected persisted on the page after a page reload. The array would cap at five cities at a time, with a newer city overriding older cities selected. 
 
-Please see deployed application at: https://willv1.github.io/weather-app/index.html
+Please see deployed application at: https://willv1.github.io/weather-app/index.html.

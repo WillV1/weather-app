@@ -1,5 +1,7 @@
 # weather-app
 
+![badge](https://img.shields.io/badge/Skill-JS-yellow)
+
 Weather-App is a third-party API powered weather forecast application that provides the user information about local real-time weather, humidity, wind speed and UV index and five-day weather forecasts. By a user selecting a city, the application accesses the OpenWeatherMap API, retrieves local weather data and stores the last five cities searched for later review. 
 
 I designed this application to demonstrate my JQuery proficiency, as well as mastery over the utilization of Bootstrap styling features, including the use of nested rows and columns and cards and demonstrate proficiency of third-party API usage, as this application required the use of three separate calls to the OpenWeatherMap API.

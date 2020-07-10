@@ -10,6 +10,7 @@
 //Generate search button for city input
 //Set up click event that when a user searches for a city, a city is able to be pulled and viewed from search box
 //Make API call for current weather based on city entered in search box
+
 $(document).ready(function () {
 
     var date = moment().format("YYYY-MM-DD")
@@ -19,7 +20,6 @@ $(document).ready(function () {
     function storeCities() {
         $('.previous-cities').empty()
         var recentCities = JSON.parse(localStorage.getItem('cities')) || []
-        //console.log(recentCities);
         for (var i = 0; i < recentCities.length; i++) {
             while (recentCities.length > 5) {
                 var lastFive = recentCities.length - 5;
@@ -34,7 +34,6 @@ $(document).ready(function () {
 
             
         }
-        console.log(recentCities);
     }
     storeCities()
 
@@ -81,19 +80,16 @@ $(document).ready(function () {
                 var latitude = response.coord.lat;
                 var longititude = response.coord.lon;
                 var queryURLTwo = 'https://api.openweathermap.org/data/2.5/uvi?appid=3fd6fe0ffea0635ce66bad8fbbaab06d&lat=' + latitude + '&lon=' + longititude;
-                //console.log(response)
+
                 // Generate separate API call for UV index after inital API call to first obtain latitude and longitude from city weather data
                 $.ajax({
                     url: queryURLTwo,
                     method: "GET"
                 })
                     .then(function (responseTwo) {
-                        //console.log(responseTwo);
-
 
                         //Generate code for storage of current information in information card; 5 day forecast information; on different urls
 
-                        //console.log(response.name)
 
                         var cityName = response.name;
                         var temp = (response.main.temp - 273.15) * 9 / 5 + 32
@@ -120,12 +116,9 @@ $(document).ready(function () {
                         }
 
                         var todaysWeather = response.weather[0].icon;
-                        //cityName.text(response.name)
                         fahrenheit.text("Temperature: " + temp.toFixed(1) + "°F")
                         humidity.text("Humidity: " + response.main.humidity + '%')
                         imperialWindSpeed.text("Wind Speed: " + windSpeed.toFixed(1) + " MPH")
-
-                        //var uvIndex = (indexEl + indexNumber);
 
                         var weatherIcon = 'https://openweathermap.org/img/wn/' + todaysWeather + ".png";
                         var iconDisplay = $('<img>')
@@ -147,7 +140,6 @@ $(document).ready(function () {
                     method: "GET"
                 })
                     .then(function (responseThree) {
-                        //console.log(responseThree);
                         var dayOne = $('<h6>');
                         var dayTwo = $('<h6>');
                         var dayThree = $('<h6>');
@@ -184,7 +176,6 @@ $(document).ready(function () {
                                 $(selector).append(forecastFahrenheitOne);
                                 $(selector).append(forecastHumidityOne);
                                 $(selector).append(iconDisplayOne);
-                                //console.log(forecastWeatherOne);
                                 j++;
                             }
                         }

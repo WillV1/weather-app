@@ -14,3 +14,7 @@ li {
 h6 {
     float: left;
 }
+
+.card-body{
+    display: none;
+}

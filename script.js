@@ -89,7 +89,7 @@ $(document).ready(function () {
                     .then(function (responseTwo) {
 
                         //Generate code for storage of current information in information card; 5 day forecast information; on different urls
-
+                        $('.city-name').empty();
 
                         var cityName = response.name;
                         var temp = (response.main.temp - 273.15) * 9 / 5 + 32
@@ -140,6 +140,11 @@ $(document).ready(function () {
                     method: "GET"
                 })
                     .then(function (responseThree) {
+                        $('#1').empty();
+                        $('#2').empty();
+                        $('#3').empty();
+                        $('#4').empty();
+                        $('#5').empty();
                         var dayOne = $('<h6>');
                         var dayTwo = $('<h6>');
                         var dayThree = $('<h6>');

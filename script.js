@@ -65,7 +65,7 @@ $(document).ready(function () {
 
     })
     function search(city) {
-        // $('.card-body').html(' ');
+        
         $(".five").show()
         var queryURLOne = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=3fd6fe0ffea0635ce66bad8fbbaab06d'
 
